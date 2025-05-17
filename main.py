@@ -1,4 +1,4 @@
-from inject import Inject
+from dependa import Inject, InjectClass
 from code import ICode, Code
 from prop import IProp, Prop
 
@@ -10,8 +10,7 @@ class IName:
     ...
 
 
-@Inject
-class Data:
+class Data(metaclass=InjectClass):
     code: ICode
     name: IName
 

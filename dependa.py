@@ -8,10 +8,10 @@ from enum import Enum, auto
 @dataclasses.dataclass
 class Dependency:
     concrete: type
-    dependency_type: DependencyType
+    dependency_type: DependencyLifeTime
 
 
-class DependencyType(Enum):
+class DependencyLifeTime(Enum):
     Transient = 1
     Scoped = auto()
     Singleton = auto()
@@ -60,21 +60,21 @@ class Inject:  # noqa
 
     @staticmethod
     def add_transient(abstract: type, concrete: type | Inject | None = None) -> None:
-        Inject.__add_dependency(abstract, concrete, DependencyType.Transient)
+        Inject.__add_dependency(abstract, concrete, DependencyLifeTime.Transient)
 
     @staticmethod
     def add_scoped(abstract: type, concrete: type | Inject | None = None) -> None:
-        Inject.__add_dependency(abstract, concrete, DependencyType.Scoped)
+        Inject.__add_dependency(abstract, concrete, DependencyLifeTime.Scoped)
 
     @staticmethod
     def add_singleton(abstract: type, concrete: type | Inject | None = None) -> None:
-        Inject.__add_dependency(abstract, concrete, DependencyType.Singleton)
+        Inject.__add_dependency(abstract, concrete, DependencyLifeTime.Singleton)
 
     @staticmethod
     def __add_dependency(
             abstract: type,
             concrete: type | Inject | None = None,
-            dependency_type: DependencyType | None = None
+            dependency_type: DependencyLifeTime | None = None
     ) -> None:
         if concrete is None:
             concrete = abstract

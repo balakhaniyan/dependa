@@ -1,4 +1,4 @@
-from inject import Inject
+from dependa import Inject
 from prop import IProp
 
 
